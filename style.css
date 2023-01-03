@@ -2,8 +2,24 @@
   box-sizing: border-box;
 }
 
+.body {
+  margin: 0;
+}
+
+.game {
+  margin: 0 auto;
+  width: 500px;
+}
+
+.title {
+  margin-top: 50px;
+  padding-bottom: 30px;
+  border-bottom: 5px solid rgb(7, 133, 7);
+}
+
 .letter-form {
-  height: 20px;
-  width: 20px;
-  background-color: rgb(212, 99, 99);
+  height: 50px;
+  width: 50px;
+  border-radius: 4px;
+  border: 2px solid black;
 }
