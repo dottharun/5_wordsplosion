@@ -8,13 +8,26 @@
 
 .game {
   margin: 0 auto;
-  width: 500px;
+  width: 400px;
 }
 
 .title {
   margin-top: 50px;
   padding-bottom: 30px;
   border-bottom: 5px solid rgb(7, 133, 7);
+}
+
+/* flexbox for all rows */
+.word-grid {
+  display: flex;
+  flex-direction: column;
+}
+
+/* flexbox for each row */
+.word-row {
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 30px;
 }
 
 .letter-form {
