@@ -3,7 +3,8 @@
 const letterGrid = document.querySelector(".word-grid");
 const letterBox = document.querySelectorAll(".letter-form");
 
-let secretWord = undefined;
+let secretWord = "";
+let currentWord = "";
 let currentRound = 0;
 
 // function to use API to get the secret word of the day
@@ -19,17 +20,23 @@ function isLetter(letter) {
   return /^[a-zA-Z]$/.test(letter);
 }
 
+function handleLetter(letter) {
+  //Add the letters to current word
+  currentWord = currentWord + letter;
+  //Print the word to DOM
+}
+
 function init() {
   getSecretWord();
 
   //click listening
   document.addEventListener("keydown", function handleKeypress(event) {
     if (isLetter(event.key)) {
-      handleLetter();
+      handleLetter(event.key);
     } else if (event.key === "Backspace") {
-      console.log("backspace pressed");
+      handleBackspace();
     } else if (event.key === "Enter") {
-      console.log("enter pressed");
+      handleEnter();
     }
   });
 }
