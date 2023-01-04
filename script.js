@@ -1,6 +1,10 @@
 "use strict";
 
+const letterGrid = document.querySelector(".word-grid");
+const letterBox = document.querySelectorAll(".letter-form");
+
 let secretWord = undefined;
+let currentRound = 0;
 
 // function to use API to get the secret word of the day
 async function getSecretWord() {
@@ -10,9 +14,27 @@ async function getSecretWord() {
   secretWord = processedPromise.word.toUpperCase();
 }
 
+// to check letter input
+function isLetter(letter) {
+  return /^[a-zA-Z]$/.test(letter);
+}
+
 function init() {
-  console.log("boo");
   getSecretWord();
+
+  //click listening
+  document.addEventListener("keydown", function handleKeypress(event) {
+    if (isLetter(event.key)) {
+      handleLetter();
+    } else if (event.key === "backspace") {
+      console.log("backspace pressed");
+    } else if (event.key === "enter") {
+      console.log("enter pressed");
+    }
+  });
 }
 
 init();
+
+//get input
+//get only letters
