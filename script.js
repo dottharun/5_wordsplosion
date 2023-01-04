@@ -26,9 +26,9 @@ function init() {
   document.addEventListener("keydown", function handleKeypress(event) {
     if (isLetter(event.key)) {
       handleLetter();
-    } else if (event.key === "backspace") {
+    } else if (event.key === "Backspace") {
       console.log("backspace pressed");
-    } else if (event.key === "enter") {
+    } else if (event.key === "Enter") {
       console.log("enter pressed");
     }
   });
