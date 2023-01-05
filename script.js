@@ -7,6 +7,7 @@ let secretWord = "";
 let currentWord = "";
 let round = 1;
 let letterPlace = 0;
+const isValid = null;
 
 // function to use API to get the secret word of the day
 async function getSecretWord() {
@@ -21,13 +22,29 @@ function isLetter(letter) {
   return /^[a-zA-Z]$/.test(letter);
 }
 
+// to validate if the current word is possible
+function validateWord(word) {
+  console.log(`lemme validate the wordo ${word}`);
+  console.log(`valid: ${isValid}`);
+}
+
+// to handle misplaced letters
+function handleMisplaced(word) {
+  console.log(`handling scrambled letters through my dyslexia on ${word}`);
+}
+
+// to handle placed letters
+function handlePlaced(word) {
+  console.log(`punching holes on ${word}`);
+}
+
 // to handle letter input
 function handleLetter(letter) {
   letter = letter.toUpperCase();
 
   if (currentWord.length < 5) {
     currentWord = currentWord + letter;
-    letterPlace += 1;
+    letterPlace++;
 
     //Print the word to DOM
     document.querySelector(`.box-${round}-${letterPlace}`).textContent = letter;
@@ -41,13 +58,24 @@ function handleBackspace() {
     currentWord = currentWord.substring(0, currentWord.length - 1);
     console.log(currentWord);
     document.querySelector(`.box-${round}-${letterPlace}`).textContent = "";
-    letterPlace -= 1;
+    letterPlace--;
   }
 }
 
 // to handle enter input
 function handleEnter() {
   console.log(`Enter my world`);
+  if (currentWord.length === 5) {
+    validateWord(currentWord);
+    if (isValid) {
+      handleMisplaced(currentWord);
+      handlePlaced(currentWord);
+      round++;
+      letterPlace = 0;
+    } else {
+      alert(`Selected word: ${word} is invalid, please input a valid word`);
+    }
+  }
 }
 
 function init() {
