@@ -28,9 +28,29 @@ function validateWord(word) {
   console.log(`valid: ${isValid}`);
 }
 
+function handleWin() {
+  for (let i = 0; i < secretWord.length; i++) {
+    document.querySelector(`.box-${round}-${i + 1}`).style.backgroundColor =
+      "#a1de85";
+  }
+
+  const winBox = document.createElement("img");
+  winBox.src = `https://media.tenor.com/h2udEKVQhuIAAAAM/winning-win.gif`;
+  winBox.className = `win-gif`;
+  winBox.alt = `meme to show you win`;
+  document.querySelector(".win-target").appendChild(winBox);
+}
+
 // to handle misplaced letters
 function handleEvaluation(word) {
   console.log(`handling scrambled letters through my dyslexia on ${word}`);
+
+  //for winining match situation
+  if (word === secretWord) {
+    handleWin();
+  }
+
+  //for not matching words
   for (let i = 0; i < word.length; i++) {
     for (let j = 0; j < secretWord.length; j++) {
       // for all boxes

@@ -22,7 +22,7 @@
 .word-grid {
   display: flex;
   flex-direction: column;
-  color: rgb(0, 166, 255);
+  color: rgb(0, 121, 187);
 }
 
 /* flexbox for each row */
@@ -40,4 +40,10 @@
   font-size: 40px;
   padding-bottom: 2px;
   text-align: center;
+  /* only for testing colors remove afterwards */
+  /* color: #dde1e4; */
+}
+
+.win-gif {
+  width: 100%;
 }
