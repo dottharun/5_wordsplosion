@@ -7,7 +7,7 @@ let secretWord = "";
 let currentWord = "";
 let round = 1;
 let letterPlace = 0;
-const isValid = true; // CHANGE THIS FOR API
+let isValid = null; // CHANGE THIS FOR API
 
 // function to use API to get the secret word of the day
 async function getSecretWord() {
@@ -15,6 +15,7 @@ async function getSecretWord() {
   const promiseResponse = await fetch(TODAY_WORD_URL);
   const processedPromise = await promiseResponse.json();
   secretWord = processedPromise.word.toUpperCase();
+  console.log(processedPromise);
 }
 
 // to check letter input
@@ -23,9 +24,31 @@ function isLetter(letter) {
 }
 
 // to validate if the current word is possible
-function validateWord(word) {
-  console.log(`lemme validate the wordo ${word}`);
+async function validateWordAndAfter(requestedWord) {
+  console.log(`lemme validate the wordo ${requestedWord}`);
   console.log(`valid: ${isValid}`);
+
+  const VALIDATION_URL = `https://words.dev-apis.com/validate-word`;
+  const promiseResponse = await fetch(VALIDATION_URL, {
+    method: "POST",
+    body: JSON.stringify({ word: `${requestedWord}` }),
+  });
+  const processedPromise = await promiseResponse.json();
+  isValid = processedPromise.validWord;
+
+  console.log(isValid);
+
+  // handling word after validation
+  if (isValid) {
+    handleEvaluation(currentWord);
+    round++;
+    letterPlace = 0;
+    currentWord = "";
+  } else {
+    alert(
+      `Selected word: ${currentWord} is invalid, please input a valid word`
+    );
+  }
 }
 
 function handleWin() {
@@ -110,15 +133,8 @@ function handleBackspace() {
 function handleEnter() {
   console.log(`Enter my world`);
   if (currentWord.length === 5) {
-    validateWord(currentWord);
-    if (isValid) {
-      handleEvaluation(currentWord);
-      round++;
-      letterPlace = 0;
-      currentWord = "";
-    } else {
-      alert(`Selected word: ${word} is invalid, please input a valid word`);
-    }
+    //validation  of the entered word
+    validateWordAndAfter(currentWord);
   }
 }
 
