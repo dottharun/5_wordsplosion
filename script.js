@@ -15,7 +15,6 @@ async function getSecretWord() {
   const promiseResponse = await fetch(TODAY_WORD_URL);
   const processedPromise = await promiseResponse.json();
   secretWord = processedPromise.word.toUpperCase();
-  console.log(processedPromise);
 }
 
 // to check letter input
@@ -25,9 +24,6 @@ function isLetter(letter) {
 
 // to validate if the current word is possible
 async function validateWordAndAfter(requestedWord) {
-  console.log(`lemme validate the wordo ${requestedWord}`);
-  console.log(`valid: ${isValid}`);
-
   const VALIDATION_URL = `https://words.dev-apis.com/validate-word`;
   const promiseResponse = await fetch(VALIDATION_URL, {
     method: "POST",
@@ -35,8 +31,6 @@ async function validateWordAndAfter(requestedWord) {
   });
   const processedPromise = await promiseResponse.json();
   isValid = processedPromise.validWord;
-
-  console.log(isValid);
 
   // handling word after validation
   if (isValid) {
@@ -66,8 +60,6 @@ function handleWin() {
 
 // to handle misplaced letters
 function handleEvaluation(word) {
-  console.log(`handling scrambled letters through my dyslexia on ${word}`);
-
   //for winining match situation
   if (word === secretWord) {
     handleWin();
@@ -82,7 +74,6 @@ function handleEvaluation(word) {
 
       // for wrong matches but existing ones
       if (word[i] === secretWord[j] && i !== j) {
-        console.log(`letter match exist for ${word[i]}`);
         document.querySelector(`.box-${round}-${i + 1}`).style.backgroundColor =
           " #ebe495";
         break;
@@ -90,7 +81,6 @@ function handleEvaluation(word) {
 
       // for exact matches at exact place
       if (word[i] === secretWord[j] && i === j) {
-        console.log(`letter match exist at exact place for ${word[i]}`);
         document.querySelector(`.box-${round}-${i + 1}`).style.backgroundColor =
           "#a1de85";
         break;
@@ -120,10 +110,8 @@ function handleLetter(letter) {
 
 // to handle backspace input
 function handleBackspace() {
-  console.log(`backspace go brrr`);
   if (currentWord.length > 0) {
     currentWord = currentWord.substring(0, currentWord.length - 1);
-    console.log(currentWord);
     document.querySelector(`.box-${round}-${letterPlace}`).textContent = "";
     letterPlace--;
   }
@@ -131,7 +119,6 @@ function handleBackspace() {
 
 // to handle enter input
 function handleEnter() {
-  console.log(`Enter my world`);
   if (currentWord.length === 5) {
     //validation  of the entered word
     validateWordAndAfter(currentWord);
