@@ -7,7 +7,7 @@ let secretWord = "";
 let currentWord = "";
 let round = 1;
 let letterPlace = 0;
-const isValid = null;
+const isValid = true; // CHANGE THIS FOR API
 
 // function to use API to get the secret word of the day
 async function getSecretWord() {
@@ -29,13 +29,31 @@ function validateWord(word) {
 }
 
 // to handle misplaced letters
-function handleMisplaced(word) {
+function handleEvaluation(word) {
   console.log(`handling scrambled letters through my dyslexia on ${word}`);
-}
+  for (let i = 0; i < word.length; i++) {
+    for (let j = 0; j < secretWord.length; j++) {
+      // for all boxes
+      document.querySelector(`.box-${round}-${i + 1}`).style.backgroundColor =
+        "#dde1e4";
 
-// to handle placed letters
-function handlePlaced(word) {
-  console.log(`punching holes on ${word}`);
+      // for wrong matches but existing ones
+      if (word[i] === secretWord[j] && i != j) {
+        console.log(`letter match exist for ${word[i]}`);
+        document.querySelector(`.box-${round}-${i + 1}`).style.backgroundColor =
+          " #ebe495";
+        break;
+      }
+
+      // for exact matches at exact place
+      if (word[i] === secretWord[j] && i === j) {
+        console.log(`letter match exist at exact place for ${word[i]}`);
+        document.querySelector(`.box-${round}-${i + 1}`).style.backgroundColor =
+          "#a1de85";
+        break;
+      }
+    }
+  }
 }
 
 // to handle letter input
@@ -68,10 +86,10 @@ function handleEnter() {
   if (currentWord.length === 5) {
     validateWord(currentWord);
     if (isValid) {
-      handleMisplaced(currentWord);
-      handlePlaced(currentWord);
+      handleEvaluation(currentWord);
       round++;
       letterPlace = 0;
+      currentWord = "";
     } else {
       alert(`Selected word: ${word} is invalid, please input a valid word`);
     }
