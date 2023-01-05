@@ -58,7 +58,7 @@ function handleEvaluation(word) {
         "#dde1e4";
 
       // for wrong matches but existing ones
-      if (word[i] === secretWord[j] && i != j) {
+      if (word[i] === secretWord[j] && i !== j) {
         console.log(`letter match exist for ${word[i]}`);
         document.querySelector(`.box-${round}-${i + 1}`).style.backgroundColor =
           " #ebe495";
@@ -73,6 +73,12 @@ function handleEvaluation(word) {
         break;
       }
     }
+  }
+
+  // for lose situation
+  if (word !== secretWord && round === 6) {
+    alert(`You lose ☔`);
+    location.reload(true);
   }
 }
 
