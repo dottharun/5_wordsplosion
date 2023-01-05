@@ -7,7 +7,7 @@ let secretWord = "";
 let currentWord = "";
 let round = 1;
 let letterPlace = 0;
-let isValid = null; // CHANGE THIS FOR API
+let isValid = null;
 
 // function to use API to get the secret word of the day
 async function getSecretWord() {
@@ -141,6 +141,3 @@ function init() {
 }
 
 init();
-
-//get input
-//get only letters
