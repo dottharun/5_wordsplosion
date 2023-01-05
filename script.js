@@ -21,6 +21,7 @@ function isLetter(letter) {
   return /^[a-zA-Z]$/.test(letter);
 }
 
+// to handle letter input
 function handleLetter(letter) {
   letter = letter.toUpperCase();
 
@@ -31,6 +32,22 @@ function handleLetter(letter) {
     //Print the word to DOM
     document.querySelector(`.box-${round}-${letterPlace}`).textContent = letter;
   }
+}
+
+// to handle backspace input
+function handleBackspace() {
+  console.log(`backspace go brrr`);
+  if (currentWord.length > 0) {
+    currentWord = currentWord.substring(0, currentWord.length - 1);
+    console.log(currentWord);
+    document.querySelector(`.box-${round}-${letterPlace}`).textContent = "";
+    letterPlace -= 1;
+  }
+}
+
+// to handle enter input
+function handleEnter() {
+  console.log(`Enter my world`);
 }
 
 function init() {
